@@ -4,11 +4,45 @@ string path = Directory.GetCurrentDirectory() + "\\nlog.config";
 
 var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 
-Console.WriteLine("Enter 1 to add movies.");
+Console.WriteLine("Enter 1 to add movie.");
 Console.WriteLine("Enter 2 to list movies.");
 Console.WriteLine("Enter anything else to quit.");
 
 String? prompt = Console.ReadLine();
+
+if (prompt == "1"){
+
+    StreamWriter sw = new StreamWriter("movies.csv");
+    Console.WriteLine("movie ID?");
+    int movieID = int.Parse(Console.ReadLine());
+    Console.WriteLine("Name of movie?");
+    String? movieName = Console.ReadLine();
+    bool genreAsk = true;
+    List<string> genres;
+    char moreGenre;
+    while(genreAsk){
+        Console.WriteLine("What genre?");
+        genres.add(Console.ReadLine);
+        Console.WriteLine("Another Genre? Y/N");
+        moreGenre = Console.ReadLine();
+            if(moreGenre == "N"){
+                genreAsk = false;
+            }
+    }
+    sw.WriteLine($"{movieID},{movieName},{string.join("|", genres)}");
+    sw.Close;
+
+}
+else if(prompt == "2"){
+         if(System.IO.File.Exists("movies.csv")){
+        StreamReader sr = new StreamReader("movies.csv");
+        while(!sr.EndOfStream){
+            sr.ReadLine;
+        }
+            sr.Close();
+         }
+
+}
 
 
 
