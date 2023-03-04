@@ -18,28 +18,27 @@ if (prompt == "1"){
     Console.WriteLine("Name of movie?");
     String? movieName = Console.ReadLine();
     bool genreAsk = true;
-    List<string> genres;
+    List<String> genres = new List<String>();
     char moreGenre;
     while(genreAsk){
         Console.WriteLine("What genre?");
-        genres.add(Console.ReadLine);
+        genres.Add(Console.ReadLine());
         Console.WriteLine("Another Genre? Y/N");
-        moreGenre = Console.ReadLine();
-            if(moreGenre == "N"){
+        moreGenre = char.Parse(Console.ReadLine());
+            if(moreGenre == 'N'){
                 genreAsk = false;
             }
     }
-    sw.WriteLine($"{movieID},{movieName},{string.join("|", genres)}");
-    sw.Close;
+    sw.WriteLine($"{movieID},{movieName},{string.Join("|", genres)}");
+        
 
 }
 else if(prompt == "2"){
          if(System.IO.File.Exists("movies.csv")){
         StreamReader sr = new StreamReader("movies.csv");
         while(!sr.EndOfStream){
-            sr.ReadLine;
+            Console.WriteLine(sr.ReadLine());
         }
-            sr.Close();
          }
 
 }
