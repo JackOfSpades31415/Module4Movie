@@ -12,9 +12,12 @@ String? prompt = Console.ReadLine();
 
 if (prompt == "1"){
 
-    StreamWriter sw = new StreamWriter("movies.csv");
+    StreamWriter sw = new StreamWriter("movies.csv", true);
     Console.WriteLine("movie ID?");
-    int movieID = int.Parse(Console.ReadLine());
+    int movieID = 0;
+    if (!int.TryParse(Console.ReadLine(), out movieID)){
+        throw new Exception("Input Invalid.");
+    }
     Console.WriteLine("Name of movie?");
     String? movieName = Console.ReadLine();
     bool genreAsk = true;
@@ -24,14 +27,18 @@ if (prompt == "1"){
         Console.WriteLine("What genre?");
         genres.Add(Console.ReadLine());
         Console.WriteLine("Another Genre? Y/N");
-        moreGenre = char.Parse(Console.ReadLine());
-            if(moreGenre == 'N'){
+        if (!Char.TryParse(Console.ReadLine(), out moreGenre)){
+        throw new Exception("Input Invalid.");
+    }
+            if(moreGenre == 'n'){
                 genreAsk = false;
             }
+            else if(moreGenre != 'y' || moreGenre != 'n'){
+                logger.Error("Invalid input.");
+            }
     }
-    sw.WriteLine($"{movieID},{movieName},{string.Join("|", genres)}");
-        
-
+    sw.WriteLine($"{movieID},{movieName},{string.Join("|", genres)}"); 
+    sw.Close();
 }
 else if(prompt == "2"){
          if(System.IO.File.Exists("movies.csv")){
@@ -42,6 +49,7 @@ else if(prompt == "2"){
          }
 
 }
+
 
 
 
